@@ -17,7 +17,9 @@ import java.util.List;
 public class IntroductionApplication extends Application<BasicConfiguration> {
 
     public static void main(final String[] args) throws Exception {
+    	System.out.println("dans le main");
         new IntroductionApplication().run("server", "introduction-config.yml");
+        
     }
 
     @Override
