@@ -1,0 +1,10 @@
+database:
+  
+ driverClass: org.postgresql.Driver
+  
+ user: userpg
+  
+ password: userpg
+
+  # the JDBC URL #url: jdbc:postgresql://localhost:5432/mytmbd?currentSchema=public
+ url: jdbc:postgresql://localhost:5432/mytmdb
