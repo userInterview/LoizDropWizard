@@ -1,5 +1,6 @@
 package com.dropwizard.introduction.resource;
 
+import com.dropwizard.introduction.dao.datamodel.LoizInject;
 import com.dropwizard.introduction.domain.Brand;
 import com.dropwizard.introduction.repositories.BrandDAO;
 
@@ -16,6 +17,9 @@ import java.util.Optional;
 public class BrandResource {
 
 	
+    @Inject
+    LoizInject loizInject ;
+	
 	@Inject
 	private BrandDAO brandDAO;
 
@@ -27,7 +31,15 @@ public class BrandResource {
 	@Path("/all")
 	public List<Brand> getBrands() {
 		System.out.println("ligne de debuggage");
+		//System.out.println(loizInject.getName());
 		return brandDAO.findAll();
+	}
+	
+	@GET
+	@Path("/name")
+	public String getGuiceInjectName() {
+		String strName = loizInject.getName() ;
+		return strName ;
 	}
 	
 }
