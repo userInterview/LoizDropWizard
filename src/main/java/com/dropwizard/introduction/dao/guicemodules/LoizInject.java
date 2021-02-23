@@ -1,31 +1,31 @@
-package com.dropwizard.introduction.dao.datamodel;
+package com.dropwizard.introduction.dao.guicemodules;
 
+
+import javax.inject.Singleton;
 //import javax.inject.Singleton;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Singleton
+public class LoizInject implements LoizInjectInterface {
 
-public class LoizInject {
-
-    
-    @NotNull
+	
+	@NotNull
     @JsonProperty
     private String name ;
 
-
+ 
     public LoizInject() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-    
-    
-	public LoizInject( String name) {
-		super();
+	}    
+   
+	public LoizInject( String name) {		
 		this.name = name;
 	}
 	
-
+    @Override
 	public String getName() {
 		return name;
 	}
@@ -34,10 +34,10 @@ public class LoizInject {
 		this.name = name;
 	}
 
-	@Override
-    public String toString() {
-        return "Account{" +
-                ", name='" + name + '\'' +
-                '}';
-    }
+//	@Override
+//    public String toString() {
+//        return "Account{" +
+//                ", name='" + name + '\'' +
+//                '}';
+//    }
 }
