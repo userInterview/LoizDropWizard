@@ -14,6 +14,10 @@ import io.dropwizard.setup.Environment;
 
 public class BrandDaoProvider implements Provider<BrandDAO> {
 	
+	private static DBI static_jdbi ;
+	
+	private BrandDAO brandDAO ; 
+	
 	@Inject	
 	BasicConfiguration basicConfiguration ;
 	
@@ -22,10 +26,11 @@ public class BrandDaoProvider implements Provider<BrandDAO> {
 	
     @Override
     public BrandDAO get() {    	    	 
-          final DBIFactory factory = new DBIFactory();        
-          final DBI jdbi = factory.build(environment, basicConfiguration.getDataSourceFactory(), "postgresql");  
-          final BrandDAO brandDAO = jdbi.onDemand(BrandDAO.class);
-    	
+    	if (static_jdbi == null ) {
+          final DBIFactory factory = new DBIFactory();            
+          static_jdbi = factory.build(environment, basicConfiguration.getDataSourceFactory(), "postgresql");           
+          }
+    	brandDAO = static_jdbi.onDemand(BrandDAO.class);
           return brandDAO ;
     }
 }
