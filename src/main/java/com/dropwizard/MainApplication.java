@@ -45,7 +45,7 @@ public class MainApplication extends Application<BasicConfiguration> {
     			.build());
     }
     
-  @Override
+ /* @Override
     public void run(final BasicConfiguration basicConfiguration, final Environment environment) {
 	  
 //	  	Guice.createInjector(new LoizInjectGuiceModule());
@@ -62,7 +62,19 @@ public class MainApplication extends Application<BasicConfiguration> {
         
     	
     	
-    }
-    
+    }*/
+    @Override
+    public void run(final BasicConfiguration basicConfiguration, final Environment environment) { 
+//        final DBIFactory factory = new DBIFactory();        
+//        final DBI jdbi = factory.build(environment, basicConfiguration.getDataSourceFactory(), "postgresql");
+//
+//        final BrandDAO brandDAO = jdbi.onDemand(BrandDAO.class);
+//        final BrandResource brandResource = new BrandResource(brandDAO);
+//
+//        environment.jersey().register(brandResource);
+    	 environment.jersey().register(BrandResource.class);
+    	
+    	
+    }  
     
 }

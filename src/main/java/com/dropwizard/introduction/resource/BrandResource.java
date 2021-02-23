@@ -1,6 +1,7 @@
 package com.dropwizard.introduction.resource;
 
 import com.dropwizard.introduction.dao.guicemodules.LoizInjectInterface;
+import com.dropwizard.introduction.dao.providers.BrandDaoProvider;
 import com.dropwizard.introduction.dao.providers.LoizInjectServiceProvider;
 import com.dropwizard.introduction.domain.Brand;
 import com.dropwizard.introduction.repositories.BrandDAO;
@@ -13,25 +14,32 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/brands")
+@Produces(MediaType.APPLICATION_JSON)
 @Singleton
-public class BrandResource {	
-	  
+public class BrandResource {
 	
 //	private final BrandDAO brandDAO;
-//	
 //
 //    public BrandResource(BrandDAO brandDAO) {
 //        this.brandDAO = brandDAO;
 //    }
-//    
 //
 //	@GET
 //	@Path("/all")
 //	public List<Brand> getBrands() {
 //		System.out.println("ligne de debuggage");
 //		return brandDAO.findAll();
-//	}	
+//	}
 	
+	@Inject
+	BrandDaoProvider attrBrandDaoProvider ;	
+	
+	@GET
+	@Path("/all")
+	public List<Brand> getBrandsProvidedInjection() {
+		System.out.println("ligne getBrands");
+		return attrBrandDaoProvider.get().findAll();
+	}
 	
     @Inject
     Provider<LoizInjectServiceProvider>  attrloizInjectServiceProvider ;
@@ -40,6 +48,7 @@ public class BrandResource {
 	@Path("/loiz")
 	@Produces(MediaType.APPLICATION_JSON)
 	public LoizInjectInterface getLoizGuiceProvidedInjection() {
+		System.out.println("ligne getBrands");
 		LoizInjectServiceProvider loizInjectServiceProvider = attrloizInjectServiceProvider.get() ;
 		LoizInjectInterface loizInjectInterface  = loizInjectServiceProvider.get() ;
 		return loizInjectInterface ;
