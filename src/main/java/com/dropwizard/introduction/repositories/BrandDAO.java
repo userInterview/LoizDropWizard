@@ -10,7 +10,6 @@ public interface BrandDAO {
 
     @SqlQuery("SELECT * FROM Brand")
     @Mapper(BrandMapper.class)
-    public List<Brand> findAll();    
-    
+    public List<Brand> findAll();
 
 }
