@@ -5,7 +5,8 @@ import com.dropwizard.introduction.dao.providers.BrandDaoProvider;
 import com.dropwizard.introduction.dao.providers.LoizInjectServiceProvider;
 import com.dropwizard.introduction.domain.Brand;
 import com.dropwizard.introduction.repositories.BrandDAO;
- 
+import com.google.inject.name.Named;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
@@ -18,38 +19,48 @@ import java.util.List;
 @Singleton
 public class BrandResource {
 	
-//	private final BrandDAO brandDAO;
-//
-//    public BrandResource(BrandDAO brandDAO) {
-//        this.brandDAO = brandDAO;
-//    }
-//
-//	@GET
-//	@Path("/all")
-//	public List<Brand> getBrands() {
-//		System.out.println("ligne de debuggage");
-//		return brandDAO.findAll();
-//	}
-	
 	@Inject
 	BrandDaoProvider attrBrandDaoProvider ;	
 	
 	@GET
-	@Path("/all")
+	@Path("/jdbi-injected-provided")
 	public List<Brand> getBrandsProvidedInjection() {
-		System.out.println("ligne getBrands");
+		System.out.println("endpoint /jdbi-injected-provided");
 		return attrBrandDaoProvider.get().findAll();
 	}
 	
+	@Inject
+	@Named("loizBindedNamed")	
+	LoizInjectInterface loizGuiceBindedNamed ;
+	
+	@GET
+	@Path("/loiz-guice-binded-named")
+	@Produces(MediaType.APPLICATION_JSON)
+	public LoizInjectInterface getLoizGuicedProvided() {
+		System.out.println("endpoint /loiz-guice-provided");
+		return loizGuiceBindedNamed ;
+	} 	
+	
+	@Inject
+	LoizInjectInterface loizGuiceProvided ;
+	
+	@GET
+	@Path("/loiz-guiced-provided")
+	@Produces(MediaType.APPLICATION_JSON)
+	public LoizInjectInterface getLoizGuiceSmpleInjection() {
+		System.out.println("endpoint /loiz-provided-guice");
+		return loizGuiceProvided ;
+	}	
+	
     @Inject
-    Provider<LoizInjectServiceProvider>  attrloizInjectServiceProvider ;
+    Provider<LoizInjectServiceProvider>  attrloizProvidedOnly ;
     
 	@GET
-	@Path("/loiz")
+	@Path("/provided-only")
 	@Produces(MediaType.APPLICATION_JSON)
 	public LoizInjectInterface getLoizGuiceProvidedInjection() {
 		System.out.println("ligne getBrands");
-		LoizInjectServiceProvider loizInjectServiceProvider = attrloizInjectServiceProvider.get() ;
+		LoizInjectServiceProvider loizInjectServiceProvider = attrloizProvidedOnly.get() ;
 		LoizInjectInterface loizInjectInterface  = loizInjectServiceProvider.get() ;
 		return loizInjectInterface ;
 	}  
