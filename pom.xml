@@ -2,15 +2,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>MavenSimpleGroupe</groupId>
-	<artifactId>MavenSimpleArtifact</artifactId>
+	<groupId>org.loiz.group</groupId>
+	<artifactId>TmDwSERVICE</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<mainclass>com.dropwizard.MainApplication</mainclass>
+		<mainclass>org.tms.MainApplication</mainclass>
 	</properties>
 
 	<dependencies>
@@ -31,14 +31,8 @@
 		</dependency>
 	</dependencies>
 
-	<!-- <dependencyManagement> <dependencies> <dependency> <groupId>ru.vyarus.guicey</groupId> 
-		<artifactId>guicey-bom</artifactId> <version>5.2.0-1</version> <type>pom</type> 
-		<scope>import</scope> </dependency> </dependencies> </dependencyManagement> 
-		<dependencies> <dependency> <groupId>ru.vyarus</groupId> <artifactId>dropwizard-guicey</artifactId> 
-		</dependency> </dependencies> -->
-
 	<!-- java -cp target/MavenSimpleArtifact-0.0.1-SNAPSHOT.jar:target/dependency/* 
-		com.dropwizard.introduction.ConfigApplication -->
+		org.tms.ConfigApplication -->
 	<profiles>
 		<profile>
 			<id>profilejar</id>

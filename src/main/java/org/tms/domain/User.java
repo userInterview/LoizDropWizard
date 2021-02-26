@@ -1,10 +1,10 @@
-package com.dropwizard.introduction.domain;
+package org.tms.domain;
 
-public class Brand {
+public class User {
     private final Long id;
     private final String name;
 
-    public Brand(final Long id, final String name) {
+    public User(final Long id, final String name) {
         this.id = id;
         this.name = name;
     }

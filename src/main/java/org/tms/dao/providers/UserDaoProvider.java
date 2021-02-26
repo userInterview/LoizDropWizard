@@ -1,22 +1,22 @@
-package com.dropwizard.introduction.dao.providers;
+package org.tms.dao.providers;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 import org.skife.jdbi.v2.DBI;
 
-import com.dropwizard.introduction.configuration.BasicConfiguration;
-import com.dropwizard.introduction.repositories.BrandDAO ;
+import org.tms.configuration.BasicConfiguration;
+import org.tms.repositories.UserDAO ;
 
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 
 
-public class BrandDaoProvider implements Provider<BrandDAO> {
+public class UserDaoProvider implements Provider<UserDAO> {
 	
 	private static DBI static_jdbi ;
 	
-	private BrandDAO brandDAO ; 
+	private UserDAO userDAO ; 
 	
 	@Inject	
 	BasicConfiguration basicConfiguration ;
@@ -25,12 +25,12 @@ public class BrandDaoProvider implements Provider<BrandDAO> {
 	Environment environment ;
 	
     @Override
-    public BrandDAO get() {    	    	 
+    public UserDAO get() {    	    	 
     	if (static_jdbi == null ) {
           final DBIFactory factory = new DBIFactory();            
           static_jdbi = factory.build(environment, basicConfiguration.getDataSourceFactory(), "postgresql");           
           }
-    	brandDAO = static_jdbi.onDemand(BrandDAO.class);
-          return brandDAO ;
+    	userDAO = static_jdbi.onDemand(UserDAO.class);
+          return userDAO ;
     }
 }

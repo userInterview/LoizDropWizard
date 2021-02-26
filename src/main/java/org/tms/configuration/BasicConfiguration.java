@@ -1,4 +1,4 @@
-package com.dropwizard.introduction.configuration;
+package org.tms.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;

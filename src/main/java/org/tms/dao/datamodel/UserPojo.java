@@ -1,38 +1,43 @@
-package com.dropwizard.introduction.dao.datamodel;
+package org.tms.dao.datamodel;
 
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BrandPojo {
+public class UserPojo {
 	
     @NotNull
-    @JsonProperty
-    private int Id;
+    @JsonProperty    
+    private int id;
     
     @NotNull
     @JsonProperty
     private String name ;
 
 
-    public BrandPojo() {
+    public UserPojo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}    
     
     
-	public BrandPojo(int id, String name) {
+	public UserPojo(int id, String name) {
 		super();
-		Id = id;
+		this.id = id;
 		this.name = name;
 	}
-
+	
+	public UserPojo(String name) {
+		super();
+		this.name = name;
+	}
+	
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getName() {
@@ -47,7 +52,7 @@ public class BrandPojo {
 	@Override
     public String toString() {
         return "Account{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }

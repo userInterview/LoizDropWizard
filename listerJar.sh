@@ -1,2 +1,1 @@
-mvn dependency:build-classpath -Dmdep.pathSeparator="
-" -Dmdep.prefix='' -Dmdep.fileSeparator="" -Dmdep.outputFile=listeDesJars.txt
+mvn dependency:tree -Dverbose -Dincludes=commons-collections  -Dmdep.outputFile=listeDesJars.txt

@@ -1,8 +1,8 @@
-package com.dropwizard.introduction.dao.providers;
+package org.tms.dao.providers;
 
 import javax.inject.Provider;
-import com.dropwizard.introduction.dao.guicemodules.LoizInject;
-import com.dropwizard.introduction.dao.guicemodules.LoizInjectInterface;
+import org.tms.dao.guicemodules.LoizInject;
+import org.tms.dao.guicemodules.LoizInjectInterface;
 
 public class LoizInjectServiceProvider implements Provider<LoizInjectInterface> {
 	

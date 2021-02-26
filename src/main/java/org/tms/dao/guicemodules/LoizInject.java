@@ -1,4 +1,4 @@
-package com.dropwizard.introduction.dao.guicemodules;
+package org.tms.dao.guicemodules;
 
 
 import javax.inject.Singleton;
