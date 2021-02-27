@@ -11,6 +11,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 
+import com.codahale.metrics.CachedGauge;
+
 public class MainApplication extends Application<BasicConfiguration> {
 
 
@@ -23,11 +25,6 @@ public class MainApplication extends Application<BasicConfiguration> {
     }
     
     @Override
-    public String getName() {
-        return "**************** TM NOVA - PRESENTATION DROPWIZARD REST SERVICE ********************";
-    }
-    
-    @Override
     public void initialize(final Bootstrap<BasicConfiguration> bootstrap) {  
     	logger.info("Starting initialize method");
     	bootstrap.addBundle(GuiceBundle.builder()
@@ -37,11 +34,9 @@ public class MainApplication extends Application<BasicConfiguration> {
     }    
 
     @Override
-    public void run(final BasicConfiguration basicConfiguration, final Environment environment) { 
+    public void run(final BasicConfiguration basicConfiguration, final Environment environment) {
     	 logger.info("Starting run method");
     	 environment.jersey().register(UserResource.class);
-    	
-    	
     }  
     
 }

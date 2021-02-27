@@ -1,5 +1,6 @@
 package org.tms.resource;
 
+import com.codahale.metrics.annotation.Timed;
 import com.google.inject.name.Named;
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -43,8 +44,10 @@ public class UserResource {
 		return userservice.getAllFullNames();
 	}
 
+	
 	@POST
 	@Path("/jdbi-injected-provided-create/{nbfullnames}")
+	@Timed
 	public List<User> createUsersProvidedInjection(@PathParam(value = "nbfullnames") int nbFullNames) {
 		logger.info("endpoint /jdbi-injected-provided-create/{nbfullnames}");
 		return userservice.createFullNames(nbFullNames);
@@ -86,6 +89,7 @@ public class UserResource {
 	@GET
 	@Path("/provided-only")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Timed
 	public LoizInjectInterface getLoizGuiceProvidedInjection() {
 		logger.info("ligne /provided-only");
 		LoizInjectServiceProvider loizInjectServiceProvider = attrloizProvidedOnly.get();
