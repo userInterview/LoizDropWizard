@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>MavenSimpleGroupe</groupId>
-  <artifactId>MavenSimpleArtifact</artifactId>
+  <groupId>org.loiz.group</groupId>
+  <artifactId>TmDwSERVICE</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <profiles>
     <profile>
@@ -52,36 +52,12 @@
                   <transformers>
                     <transformer />
                     <transformer>
-                      <mainClass>com.dropwizard.MainApplication</mainClass>
+                      <mainClass>org.tms.MainApplication</mainClass>
                     </transformer>
                   </transformers>
-                  <createDependencyReducedPom>true</createDependencyReducedPom>
-                  <filters>
-                    <filter>
-                      <artifact>*:*</artifact>
-                      <excludes>
-                        <exclude>META-INF/*.SF</exclude>
-                        <exclude>META-INF/*.DSA</exclude>
-                        <exclude>META-INF/*.RSA</exclude>
-                      </excludes>
-                    </filter>
-                  </filters>
                 </configuration>
               </execution>
             </executions>
-            <configuration>
-              <createDependencyReducedPom>true</createDependencyReducedPom>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <excludes>
-                    <exclude>META-INF/*.SF</exclude>
-                    <exclude>META-INF/*.DSA</exclude>
-                    <exclude>META-INF/*.RSA</exclude>
-                  </excludes>
-                </filter>
-              </filters>
-            </configuration>
           </plugin>
         </plugins>
       </build>
@@ -121,7 +97,7 @@
     </profile>
   </profiles>
   <properties>
-    <mainclass>com.dropwizard.MainApplication</mainclass>
+    <mainclass>org.tms.MainApplication</mainclass>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>

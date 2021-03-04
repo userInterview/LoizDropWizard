@@ -35,12 +35,6 @@ public class Userserviceimpl implements Userservice {
 
 	@Override
 	public List<User> createFullNames(int nbEntries) {
-		attrUserDaoProvider.get().clearTableFullNames() ;
-		for (int i = 0 ; i <= nbEntries ; i++) {
-			String strFulname = "nom" + i + " prenom " + i ;			
-			attrUserDaoProvider.get().createFullNames(strFulname);
-			//logger.info("insertion de {}",strFulname);
-		}
-		return getAllFullNames() ;
+		return attrUserDaoProvider.get().clearAndCreateEntries(nbEntries);
 	}
 }

@@ -1,5 +1,4 @@
 package org.tms.repositories;
-import org.tms.dao.datamodel.UserPojo;
 import org.tms.dao.mappers.UserMapper;
 import org.tms.domain.User;
 
@@ -8,20 +7,31 @@ import java.util.List;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.Transaction;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
-public interface UserDAO {
+public abstract class UserDAO {
 
     @SqlQuery("SELECT id, name FROM fullnames")
     @Mapper(UserMapper.class)
-    List<User> findAll();      
+	public abstract List<User> findAll();      
     
     @SqlUpdate("INSERT INTO fullnames (name) VALUES (:columnName)")    
-    void createFullNames(@Bind("columnName") String strFulname);
-    
-    //@SqlUpdate("TRUNCATE fullnames RESTART WITH 1")
-    //ALTER SEQUENCE product_id_seq RESTART WITH 1453
+    public abstract void createFullNames(@Bind("columnName") String strFulname);    
+
     @SqlUpdate("TRUNCATE TABLE fullnames RESTART IDENTITY")
-    void clearTableFullNames();
+    public abstract void clearTableFullNames();    
+    
+    @Transaction
+    public List<User> clearAndCreateEntries(int nbEntries) {
+    	
+		clearTableFullNames() ;
+		
+		for (int i = 0 ; i <= nbEntries ; i++) {
+			createFullNames("nom" + i + " prenom " + i);
+		}
+		
+		return findAll();		
+    }
     
 }

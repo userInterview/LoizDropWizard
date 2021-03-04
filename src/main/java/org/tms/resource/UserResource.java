@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.tms.dao.guicemodules.LoizInjectInterface;
-import org.tms.dao.providers.UserDaoProvider;
 import org.tms.dao.providers.LoizInjectServiceProvider;
 import org.tms.domain.User;
 import org.tms.services.Userservice;
@@ -43,12 +42,11 @@ public class UserResource {
 		logger.info("endpoint /jdbi-injected-provided");
 		return userservice.getAllFullNames();
 	}
-
 	
 	@POST
 	@Path("/jdbi-injected-provided-create/{nbfullnames}")
 	@Timed
-	public List<User> createUsersProvidedInjection(@PathParam(value = "nbfullnames") int nbFullNames) {
+	public List<User> initUserFullNamesProvidedInjection(@PathParam(value = "nbfullnames") int nbFullNames) {
 		logger.info("endpoint /jdbi-injected-provided-create/{nbfullnames}");
 		return userservice.createFullNames(nbFullNames);
 	}

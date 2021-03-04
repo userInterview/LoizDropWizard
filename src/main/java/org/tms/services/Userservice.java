@@ -8,8 +8,8 @@ public interface Userservice {
 
 	public List<User> getAllFullNames();
 
-	List<User> createFullNames(int nbEntries);
+	public void deleteAllFullNames();
 
-	void deleteAllFullNames();
-
+	public List<User> createFullNames(int nbEntries);
+	
 }

@@ -20,13 +20,13 @@ public class MainApplication extends Application<BasicConfiguration> {
 	
 	
     public static void main(final String[] args) throws Exception {
-    	logger.info("Starting main method");
+    	logger.info("Starting main");
     	new MainApplication().run(args);
     }
     
     @Override
     public void initialize(final Bootstrap<BasicConfiguration> bootstrap) {  
-    	logger.info("Starting initialize method");
+    	logger.info("Starting initialize");
     	bootstrap.addBundle(GuiceBundle.builder()
     			.modules(new LoizInjectGuiceModule())
     			.enableAutoConfig(this.getClass().getPackage().getName())    			
@@ -35,7 +35,7 @@ public class MainApplication extends Application<BasicConfiguration> {
 
     @Override
     public void run(final BasicConfiguration basicConfiguration, final Environment environment) {
-    	 logger.info("Starting run method");
+    	 logger.info("Starting run");
     	 environment.jersey().register(UserResource.class);
     }  
     
