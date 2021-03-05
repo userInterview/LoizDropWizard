@@ -5,16 +5,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tms.dao.datamodel.UserPojo;
 import org.tms.dao.providers.UserDaoProvider;
-import org.tms.domain.User;
+import org.tms.pojo.User;
 
 @Singleton
-public class Userserviceimpl implements Userservice {
-	
+public class Userserviceimpl implements Userservice {	
 
 	private static Logger logger = LoggerFactory.getLogger(Userserviceimpl.class);
 	
@@ -36,5 +33,10 @@ public class Userserviceimpl implements Userservice {
 	@Override
 	public List<User> createFullNames(int nbEntries) {
 		return attrUserDaoProvider.get().clearAndCreateEntries(nbEntries);
+	}
+	
+	@Override
+	public void updateFullName(User user) {
+		attrUserDaoProvider.get().updateFullName(user);	
 	}
 }

@@ -7,7 +7,6 @@ import io.dropwizard.db.DataSourceFactory;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 public class BasicConfiguration extends Configuration {
 	
@@ -18,13 +17,6 @@ public class BasicConfiguration extends Configuration {
 
     public DataSourceFactory getDataSourceFactory() {
         return database;
-    }
-    
-    @NotEmpty
-    private String name;
-
-    public String getName(){
-        return name;
-    }
+    }       
     
 }

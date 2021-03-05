@@ -2,7 +2,7 @@ package org.tms.services;
 
 import java.util.List;
 
-import org.tms.domain.User;
+import org.tms.pojo.User;
 
 public interface Userservice {
 
@@ -11,5 +11,7 @@ public interface Userservice {
 	public void deleteAllFullNames();
 
 	public List<User> createFullNames(int nbEntries);
+
+	public void updateFullName(User user);
 	
 }

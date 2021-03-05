@@ -1,13 +1,16 @@
 package org.tms.resource;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.name.Named;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
+import javax.validation.Valid;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -19,12 +22,19 @@ import org.slf4j.LoggerFactory;
 
 import org.tms.dao.guicemodules.LoizInjectInterface;
 import org.tms.dao.providers.LoizInjectServiceProvider;
-import org.tms.domain.User;
+import org.tms.dto.UserDTO;
+import org.tms.helper.CommonHelper;
+import org.tms.pojo.User;
 import org.tms.services.Userservice;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 //import org.apache.logging.log4j.Logger;  Logger logger = LogManager.getLogger(Hello.class);
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
@@ -38,10 +48,11 @@ public class UserResource {
 
 	@GET
 	@Path("/jdbi-injected-provided-read")
-	public List<User> getUsersProvidedInjection() {
+	public List<UserDTO> getUsersProvidedInjection() {
 		logger.info("endpoint /jdbi-injected-provided");
-		return userservice.getAllFullNames();
-	}
+		List<User> lUsers = userservice.getAllFullNames();
+		return CommonHelper.convertToListDto(lUsers) ;		
+	}	
 	
 	@POST
 	@Path("/jdbi-injected-provided-create/{nbfullnames}")
@@ -57,14 +68,21 @@ public class UserResource {
 		userservice.deleteAllFullNames();
 		return Response.ok().build();
 	}
-
+	
+	@PUT
+	@Path("/jdbi-injected-provided-updateuser")	
+	public Response updateFullName(@Valid UserDTO userDTO) throws IllegalAccessException, InvocationTargetException {		
+		User user = CommonHelper.convertToModel(userDTO) ;
+		userservice.updateFullName(user);
+		return Response.ok().build();
+	}
+	
 	@Inject
 	@Named("loiznamed")
 	LoizInjectInterface loizGuiceBindedNamed;
 
 	@GET
 	@Path("/loiz-guice-binded-named")
-	@Produces(MediaType.APPLICATION_JSON)
 	public LoizInjectInterface getLoizGuicedProvided() {
 		logger.info("endpoint /loiz-guice-provided");
 		return loizGuiceBindedNamed;
@@ -75,7 +93,6 @@ public class UserResource {
 
 	@GET
 	@Path("/loiz-guiced-provided")
-	@Produces(MediaType.APPLICATION_JSON)
 	public LoizInjectInterface getLoizGuiceSmpleInjection() {
 		logger.info("endpoint /loiz-provided-guice");
 		return loizGuiceProvided;
@@ -86,7 +103,6 @@ public class UserResource {
 
 	@GET
 	@Path("/provided-only")
-	@Produces(MediaType.APPLICATION_JSON)
 	@Timed
 	public LoizInjectInterface getLoizGuiceProvidedInjection() {
 		logger.info("ligne /provided-only");

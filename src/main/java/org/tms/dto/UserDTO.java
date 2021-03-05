@@ -1,43 +1,44 @@
-package org.tms.dao.datamodel;
+package org.tms.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UserPojo {
+public class UserDTO {
 	
     @NotNull
     @JsonProperty    
-    private int id;
+    private Long id;
     
-    @NotNull
+    @NotBlank
     @JsonProperty
     private String name ;
 
 
-    public UserPojo() {
+    public UserDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}    
     
     
-	public UserPojo(int id, String name) {
+	public UserDTO(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 	
-	public UserPojo(String name) {
+	public UserDTO(String name) {
 		super();
 		this.name = name;
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		id = id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -52,7 +53,7 @@ public class UserPojo {
 	@Override
     public String toString() {
         return "Account{" +
-                "Id=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }

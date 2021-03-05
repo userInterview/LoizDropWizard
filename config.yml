@@ -1,5 +1,3 @@
-name: hello
-
 database:  
  driverClass: org.postgresql.Driver  
  user: userpg  

@@ -31,6 +31,7 @@ public class UserDaoProvider implements Provider<UserDAO> {
           static_jdbi = factory.build(environment, basicConfiguration.getDataSourceFactory(), "postgresql");           
           }
     	userDAO = static_jdbi.onDemand(UserDAO.class);
-          return userDAO ;
+    	
+        return userDAO ;
     }
 }
