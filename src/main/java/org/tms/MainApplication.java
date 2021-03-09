@@ -11,22 +11,20 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 
-import com.codahale.metrics.CachedGauge;
 
 public class MainApplication extends Application<BasicConfiguration> {
-
 
 	private static Logger logger = LoggerFactory.getLogger(MainApplication.class);
 	
 	
     public static void main(final String[] args) throws Exception {
-    	logger.info("Starting main");
+    	logger.info("Starting main method");
     	new MainApplication().run(args);
     }
     
     @Override
     public void initialize(final Bootstrap<BasicConfiguration> bootstrap) {  
-    	logger.info("Starting initialize");
+    	
     	bootstrap.addBundle(GuiceBundle.builder()
     			.modules(new LoizInjectGuiceModule())
     			.enableAutoConfig(this.getClass().getPackage().getName())    			
@@ -35,8 +33,7 @@ public class MainApplication extends Application<BasicConfiguration> {
 
     @Override
     public void run(final BasicConfiguration basicConfiguration, final Environment environment) {
-    	 logger.info("Starting run");
+   	 	logger.info("Starting run method");
     	 environment.jersey().register(UserResource.class);
-    }  
-    
+    }      
 }

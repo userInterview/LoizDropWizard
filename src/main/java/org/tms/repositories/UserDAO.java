@@ -20,8 +20,7 @@ public abstract class UserDAO {
     public abstract void createFullNames(@Bind("columnName") String strFulname);    
 
     @SqlUpdate("TRUNCATE TABLE fullnames RESTART IDENTITY")
-    public abstract void clearTableFullNames();    
-    
+    public abstract void clearTableFullNames();        
     
     @SqlUpdate("update fullnames set NAME = :name where ID = :id")
     public abstract  void updateFullName(@BindBean User user);
@@ -31,11 +30,11 @@ public abstract class UserDAO {
     	
 		clearTableFullNames() ;
 		
-		for (int i = 0 ; i <= nbEntries ; i++) {
+		for (int i = 0 ; i < nbEntries ; i++) {
 			createFullNames("nom" + i + " prenom " + i);
 		}
 		
-		return findAll();		
+		return findAll();
     }
     
 }
